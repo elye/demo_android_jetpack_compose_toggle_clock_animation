@@ -15,17 +15,10 @@ import androidx.compose.ui.unit.sp
 fun Toggle(modifier: Modifier = Modifier,
            toggleState: MutableState<Boolean>,
            onToggle: (Boolean) -> Unit) {
-
-    Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = toggleState.value.toString())
-        TextButton(onClick = {
-            onToggle(toggleState.value)
-            toggleState.value = !toggleState.value
-        }) {
-            Text(fontSize = 32.sp, text = if (toggleState.value) "Stop" else "Start")
-        }
+    TextButton(modifier = modifier, onClick = {
+        onToggle(toggleState.value)
+        toggleState.value = !toggleState.value
+    }) {
+        Text(fontSize = 32.sp, text = if (toggleState.value) "Stop" else "Start")
     }
 }

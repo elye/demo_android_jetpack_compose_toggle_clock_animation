@@ -31,12 +31,9 @@ class MainActivity : AppCompatActivity() {
                     horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 val clockAnimator = ClockAnimator(animatedFloat(initVal = 0f))
-
-                Clock(modifier = Modifier
+                clockAnimator.Clock(modifier = Modifier
                         .aspectRatio(1.0f)
-                        .padding(64.dp),
-                        clockAnimator)
-
+                        .padding(64.dp))
                 Toggle(modifier = Modifier, toggleState = toggleState) {
                     clockAnimator.toggleAnimation(it)
                 }
