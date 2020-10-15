@@ -25,16 +25,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val animationStart: MutableState<Boolean> = mutableStateOf(false)
-        val clockAnimator = ClockAnimator(animationStart)
 
         setContent {
             Column(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                clockAnimator.Clock(modifier = Modifier
+                Clock(modifier = Modifier
                         .aspectRatio(1.0f)
-                        .padding(64.dp))
+                        .padding(64.dp),
+                        animationStart)
                 Toggle(modifier = Modifier) {
                     animationStart.value = !it
                 }
