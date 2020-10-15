@@ -1,6 +1,5 @@
 package com.example.jcsimpleclock
 
-import android.util.Log
 import androidx.compose.animation.animatedFloat
 import androidx.compose.animation.core.AnimationConstants
 import androidx.compose.animation.core.LinearEasing
@@ -20,7 +19,6 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun Clock(modifier: Modifier = Modifier, animationStart: MutableState<Boolean>) {
-
     var currentAngle = 0f
     var previousT = 0f
 
@@ -55,9 +53,7 @@ fun Clock(modifier: Modifier = Modifier, animationStart: MutableState<Boolean>) 
                     if (previousT > t) {
                         currentAngle += 360 / 60
                     }
-                    Log.d("Elisha", "short hand previousT before = $previousT")
                     previousT = t
-                    Log.d("Elisha", "short hand previousT after = $previousT")
                     rotate(currentAngle, middle)
                 }, {
             drawLine(
@@ -69,7 +65,6 @@ fun Clock(modifier: Modifier = Modifier, animationStart: MutableState<Boolean>) 
         }
         )
         withTransform({
-            Log.d("Elisha", "red hand previousT = $previousT")
             rotate(360 * previousT, middle)
         }, {
             drawLine(strokeWidth = 8.dp.toPx(),
