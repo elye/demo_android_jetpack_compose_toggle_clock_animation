@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.sp
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val toggleState: MutableState<Boolean> = mutableStateOf(false)
 
         setContent {
             Column(
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity() {
                 clockAnimator.Clock(modifier = Modifier
                         .aspectRatio(1.0f)
                         .padding(64.dp))
-                Toggle(modifier = Modifier, toggleState = toggleState) {
+                Toggle(modifier = Modifier) {
                     clockAnimator.toggleAnimation(it)
                 }
             }
