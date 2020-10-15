@@ -24,17 +24,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val animationStart: MutableState<Boolean> = mutableStateOf(false)
+        val clockAnimator = ClockAnimator(animationStart)
+
         setContent {
             Column(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                val clockAnimator = ClockAnimator(animatedFloat(initVal = 0f))
                 clockAnimator.Clock(modifier = Modifier
                         .aspectRatio(1.0f)
                         .padding(64.dp))
                 Toggle(modifier = Modifier) {
-                    clockAnimator.toggleAnimation(it)
+                    animationStart.value = !it
                 }
             }
         }

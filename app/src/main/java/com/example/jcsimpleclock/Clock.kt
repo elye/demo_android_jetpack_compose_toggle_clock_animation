@@ -1,9 +1,12 @@
 package com.example.jcsimpleclock
 
+import android.util.Log
+import androidx.compose.animation.animatedFloat
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
@@ -12,18 +15,32 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.unit.dp
 
-class ClockAnimator(var animatedFloat: AnimatedFloat) {
+class ClockAnimator(private val animationStart: MutableState<Boolean>) {
 
     private var currentAngle = 0f
     private var previousT = 0f
 
     @Composable
     fun Clock(modifier: Modifier = Modifier) {
-
+        val animatedFloat = animatedFloat(initVal = 0f)
         val handColor = if (isSystemInDarkTheme()) Color.White else Color.Black
-        val t = animatedFloat.value
-
         Canvas(modifier = modifier) {
+            if (animatedFloat.isRunning && !animationStart.value) {
+                animatedFloat.stop()
+            } else if(!animatedFloat.isRunning && animationStart.value) {
+                animatedFloat.snapTo(0f)
+                animatedFloat.animateTo(
+                        targetValue = 1f,
+                        anim = repeatable(
+                                iterations = AnimationConstants.Infinite,
+                                animation = tween(durationMillis = 2000, easing = LinearEasing),
+                        )
+                )
+                currentAngle = 0f
+                previousT = 0f
+            }
+
+            val t = animatedFloat.value
             val middle = Offset(size.minDimension / 2, size.minDimension / 2)
             drawCircle(
                     color = handColor,
@@ -60,27 +77,5 @@ class ClockAnimator(var animatedFloat: AnimatedFloat) {
             }
             )
         }
-    }
-
-    fun toggleAnimation(isAnimated: Boolean) {
-        if (isAnimated) {
-            animatedFloat.stop()
-        } else {
-            animatedFloat.snapTo(0f)
-            startAnimation()
-            currentAngle = 0f
-            previousT = 0f
-
-        }
-    }
-
-    private fun startAnimation() {
-        animatedFloat.animateTo(
-                targetValue = 1f,
-                anim = repeatable(
-                        iterations = AnimationConstants.Infinite,
-                        animation = tween(durationMillis = 2000, easing = LinearEasing),
-                )
-        )
     }
 }
