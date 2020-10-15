@@ -1,6 +1,5 @@
 package com.example.jcsimpleclock
 
-import android.util.Log
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.isSystemInDarkTheme
