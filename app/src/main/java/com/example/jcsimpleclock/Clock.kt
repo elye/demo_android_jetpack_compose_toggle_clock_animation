@@ -1,5 +1,6 @@
 package com.example.jcsimpleclock
 
+import android.util.Log
 import androidx.compose.animation.animatedFloat
 import androidx.compose.animation.core.AnimationConstants
 import androidx.compose.animation.core.LinearEasing
@@ -17,11 +18,11 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.unit.dp
 
-var currentAngle = 0f
-var previousT = 0f
-
 @Composable
 fun Clock(modifier: Modifier = Modifier, animationStart: MutableState<Boolean>) {
+
+    var currentAngle = 0f
+    var previousT = 0f
 
     val animatedFloat = animatedFloat(initVal = 0f)
     val handColor = if (isSystemInDarkTheme()) Color.White else Color.Black
@@ -40,10 +41,7 @@ fun Clock(modifier: Modifier = Modifier, animationStart: MutableState<Boolean>) 
             currentAngle = 0f
             previousT = 0f
         }
-
         val t = animatedFloat.value
-
-
         val middle = Offset(size.minDimension / 2, size.minDimension / 2)
         drawCircle(
                 color = handColor,
@@ -57,8 +55,9 @@ fun Clock(modifier: Modifier = Modifier, animationStart: MutableState<Boolean>) 
                     if (previousT > t) {
                         currentAngle += 360 / 60
                     }
-
+                    Log.d("Elisha", "short hand previousT before = $previousT")
                     previousT = t
+                    Log.d("Elisha", "short hand previousT after = $previousT")
                     rotate(currentAngle, middle)
                 }, {
             drawLine(
@@ -70,7 +69,8 @@ fun Clock(modifier: Modifier = Modifier, animationStart: MutableState<Boolean>) 
         }
         )
         withTransform({
-            rotate(360 * t, middle)
+            Log.d("Elisha", "red hand previousT = $previousT")
+            rotate(360 * previousT, middle)
         }, {
             drawLine(strokeWidth = 8.dp.toPx(),
                     cap = StrokeCap.Round,

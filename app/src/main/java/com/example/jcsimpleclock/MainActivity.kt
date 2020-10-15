@@ -14,9 +14,10 @@ import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.dp
 
 class MainActivity : AppCompatActivity() {
+
+    private val animationStart: MutableState<Boolean> = mutableStateOf(false)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val animationStart: MutableState<Boolean> = mutableStateOf(false)
 
         setContent {
             Column(
