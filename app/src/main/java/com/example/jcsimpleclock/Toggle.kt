@@ -13,8 +13,8 @@ fun Toggle(modifier: Modifier = Modifier,
            onToggle: (Boolean) -> Unit) {
     val toggleState: MutableState<Boolean> = mutableStateOf(false)
     TextButton(modifier = modifier, onClick = {
-        onToggle(toggleState.value)
         toggleState.value = !toggleState.value
+        onToggle(toggleState.value)
     }) {
         Text(fontSize = 32.sp, text = if (toggleState.value) "Stop" else "Start")
     }

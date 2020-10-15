@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                         .padding(64.dp),
                         animationStart)
                 Toggle(modifier = Modifier) {
-                    animationStart.value = !it
+                    animationStart.value = it
                 }
             }
         }
