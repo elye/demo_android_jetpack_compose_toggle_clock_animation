@@ -1,8 +1,10 @@
 package com.example.jcsimpleclock
 
-import android.util.Log
 import androidx.compose.animation.animatedFloat
-import androidx.compose.animation.core.*
+import androidx.compose.animation.core.AnimationConstants
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.repeatable
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
