@@ -1,6 +1,6 @@
 package com.example.jcsimpleclock
 
-import androidx.compose.foundation.Text
+import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
